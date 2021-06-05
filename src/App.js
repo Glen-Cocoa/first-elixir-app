@@ -1,21 +1,21 @@
 import React, { useState, useEffect } from 'react'
-import Panel from './components/Panel'
+import Home from './pages/Home'
 import MenuContext from './utils/MenuContext'
 import * as API from './utils/API'
 
 function App() {
-  const [ menuState, setMenuState ] = useState()
+
+  const [ menuState, setMenuState ] = useState([])
 
   useEffect(() => {
     API.getMenu.then((res) => {
       setMenuState(res)
-      console.log(menuState)
     })
   }, [menuState])
 
   return (
     <MenuContext.Provider value={menuState}>
-      <Panel/>
+      <Home/>
     </MenuContext.Provider>
   )
 }

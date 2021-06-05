@@ -1,0 +1,24 @@
+Split into two panels
+    each panel has list of menu items
+    each item has { name, description, price }
+
+determine how many cards can fit vertically on screen
+    if all can fit, only draw left
+    if not, draw max on left and rest on right
+    innerHeight/cardHeight
+
+    cardHeight = 1/8*innerHeight
+
+
+Items start from top left panel
+    each item goes below prior
+    once left is out of space, begin adding to right
+    All items must fit into vieport w/out scrolling
+    panels centered vertically and horizontally
+
+Must be able to edit menu
+    Button "Add Menu Item"
+        brings up modal with inputs for { name, description, price }
+        on save add's item to Menu
+
+Extra Credit - back end to persist data via REST API

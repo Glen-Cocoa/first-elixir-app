@@ -1,15 +1,20 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import MenuItem from '../MenuItem'
 
-export default function Panel() {
+const styles = {
+    panel : {
+        minWidth: '100px',
+    }
+}
+
+export default function Panel({ items }) {
+   
     return (
-        <div className="container">
-            <h1>Hello</h1>
-            <ul className="parent">
-                <li>One</li>
-                <li>Two</li>
-                <li>Three</li>
-                <li>Four</li>
-            </ul>
+        <div style={styles.panel} className='container'>
+            { 
+                items.length ? items.map(item => MenuItem(item)) :
+                <h1> Lorem Ipsum </h1> 
+            }
         </div>
     )
 }
