@@ -1,25 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from 'react'
+import Panel from './components/Panel'
+import MenuContext from './utils/MenuContext'
+import * as API from './utils/API'
 
 function App() {
+  const [ menuState, setMenuState ] = useState()
+
+  useEffect(() => {
+    API.getMenu.then((res) => {
+      setMenuState(res)
+      console.log(menuState)
+    })
+  }, [menuState])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <MenuContext.Provider value={menuState}>
+      <Panel/>
+    </MenuContext.Provider>
+  )
 }
 
-export default App;
+export default App
