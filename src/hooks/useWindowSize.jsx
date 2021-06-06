@@ -1,26 +1,26 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect } from "react";
 
 function getWindowSize() {
-    const { innerWidth: width, innerHeight: height } = window
+  const { innerWidth: width, innerHeight: height } = window;
 
-    return {
-        width,
-        height
-    }
+  return {
+    width,
+    height,
+  };
 }
 
 export default function useWindowSize() {
-    const [windowSize, setWindowSize] = useState(getWindowSize())
+  const [windowSize, setWindowSize] = useState(getWindowSize());
 
-    //todo: debounce
-    useEffect(() => {
-        function handleResize() {
-          setWindowSize(getWindowSize())
-        }
-    
-        window.addEventListener('resize', handleResize)
-        return () => window.removeEventListener('resize', handleResize)
-      }, [])
+  //todo: debounce
+  useEffect(() => {
+    function handleResize() {
+      setWindowSize(getWindowSize());
+    }
 
-      return windowSize
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  return windowSize;
 }

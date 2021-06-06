@@ -12,7 +12,7 @@ export default function Panel({ items, clickHandler }) {
         <div style={styles.panel} className='container'>
             { 
                 items.length ? items.map(item => MenuItem({...item, clickHandler})) :
-                <div></div>
+                <div>No Items In this Menu Panel</div>
             }
         </div>
     )
