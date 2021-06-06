@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import MenuItem from '../MenuItem'
 
 const styles = {
@@ -7,13 +7,12 @@ const styles = {
     }
 }
 
-export default function Panel({ items }) {
-   
+export default function Panel({ items, clickHandler }) {
     return (
         <div style={styles.panel} className='container'>
             { 
-                items.length ? items.map(item => MenuItem(item)) :
-                <h1> Lorem Ipsum </h1> 
+                items.length ? items.map(item => MenuItem({...item, clickHandler})) :
+                <div></div>
             }
         </div>
     )

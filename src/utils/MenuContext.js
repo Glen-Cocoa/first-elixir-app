@@ -1,7 +1,7 @@
 import React from 'react'
 
 const MenuContext = React.createContext({
-    items: [],
+    items: []
 })
 
 export default MenuContext

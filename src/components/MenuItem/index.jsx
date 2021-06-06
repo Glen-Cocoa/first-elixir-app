@@ -17,9 +17,10 @@ let styles = {
     }
 }
 
-export default function MenuItem({ name, description, price }) {
+export default function MenuItem({ name, description, price, clickHandler }) {
     return (
-        <Card style={styles.card} variant='outlined' key={name + Math.random()}>
+        <Card style={styles.card} variant='outlined' key={name}>
+            <button data-value={name} onClick={clickHandler}>X</button>
             <CardContent>
                 <Typography variant='h5' component='h2' color="textSecondary" gutterBottom>
                     { name }
