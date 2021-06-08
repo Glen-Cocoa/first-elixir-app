@@ -10,7 +10,8 @@ import axios from 'axios'
 
 export const getMenu = async function () {
   try {
-      return await axios.get('http://localhost:4000/api/items')
+    return await axios
+      .get('http://localhost:4000/api/items')
       .then((res) => res.data)
   } catch (e) {
     console.error(e)
@@ -21,14 +22,15 @@ export const addMenuItem = async function (item) {
   try {
     const data = JSON.stringify({ item: item })
     const config = {
-      headers: { 
+      headers: {
         'Content-Type': 'application/json',
         'Access-Control-Allow-Origin': '*'
       }
     }
 
-    return await axios.post('http://localhost:4000/api/items', data, config)
-    .then((res) => console.log(res))
+    return await axios
+      .post('http://localhost:4000/api/items', data, config)
+      .then((res) => console.log(res))
   } catch (e) {
     console.error(e)
   }
@@ -36,8 +38,9 @@ export const addMenuItem = async function (item) {
 
 export const deleteMenuItem = async function (id) {
   try {
-    return await axios.delete(`http://localhost:4000/api/items/${id}`)
-    .then((res) => console.log(res))
+    return await axios
+      .delete(`http://localhost:4000/api/items/${id}`)
+      .then((res) => console.log(res))
   } catch (e) {
     console.error(e)
   }

@@ -1,51 +1,54 @@
-import React, { useContext } from "react";
-import SplitPane from "react-split-pane";
-import Panel from "../components/Panel";
-import useWindowSize from "../hooks/useWindowSize";
-import TransitionsModal from "../components/Modal";
-import ItemsContext from "../contexts/ItemsContext";
-import { addMenuItem } from "../utils/API"
+import React, { useContext, useState } from 'react'
+import SplitPane from 'react-split-pane'
+import Panel from '../components/Panel'
+import useWindowSize from '../hooks/useWindowSize'
+import TransitionsModal from '../components/Modal'
+import ItemsContext from '../contexts/ItemsContext'
+import { addMenuItem } from '../utils/API'
 
 function Home() {
-  const { width, height } = useWindowSize();
-  const numberOfItems = Math.floor(height / 130);
-  const [open, setOpen] = React.useState(false);
+  const { width, height } = useWindowSize()
+  const numberOfItems = Math.floor(height / 130)
+  const [open, setOpen] = useState(false)
   const { menuItems, setMenuItems } = useContext(ItemsContext)
 
   const styles = {
     container: {
-      paddingTop: "3%",
-    },
-  };
-  const handleOpen = () => {
-    setOpen(true);
-  };
+      paddingTop: '3%'
+    }
+  }
+  const handleOpen = (fieldsToReset) => {
+    resetFields(fieldsToReset)
+    setOpen(true)
+  }
 
   const handleClose = () => {
-    setOpen(false);
-  };
+    setOpen(false)
+  }
 
-  const formBtnHandler = (e, name, price, description) => {
+  const resetFields = (args) => {
+    args.forEach((fn) => fn(''))
+  }
+
+  const formBtnHandler = (e, name, price, description, setters) => {
     e.preventDefault()
-    if(!menuItems.map((item)=>item.name).includes(name)){
-      const newItem = { name, price, description}
+    if (menuItems.every((item) => item.name !== name)) {
+      const newItem = { name, price, description }
       setMenuItems([...menuItems, newItem])
       addMenuItem(newItem)
+      resetFields(setters)
       setOpen(false)
-    } else { 
-      console.error("Name must be unique")
+    } else {
+      console.error('Name must be unique')
+      return
     }
   }
 
   return (
-    <div style={styles.container} className="container">
-      <SplitPane size={width / 2} minSize={width / 2} split="vertical">
-        <Panel
-          items={menuItems.slice(0, numberOfItems)}
-        />
-        <Panel
-          items={menuItems.slice(numberOfItems, numberOfItems * 2)}
-        />
+    <div style={styles.container} className='container'>
+      <SplitPane size={width / 2} minSize={width / 2} split='vertical'>
+        <Panel items={menuItems.slice(0, numberOfItems)} />
+        <Panel items={menuItems.slice(numberOfItems, numberOfItems * 2)} />
       </SplitPane>
       <TransitionsModal
         handleOpen={handleOpen}
@@ -54,7 +57,7 @@ function Home() {
         formBtnHandler={formBtnHandler}
       />
     </div>
-  );
+  )
 }
 
-export default Home;
+export default Home
