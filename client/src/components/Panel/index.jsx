@@ -7,11 +7,11 @@ const styles = {
     }
 }
 
-export default function Panel({ items, clickHandler }) {
+export default function Panel({ items }) {
     return (
         <div style={styles.panel} className='container'>
             { 
-                items.length ? items.map(item => MenuItem({...item, clickHandler})) :
+                items.length ? items.map(item => MenuItem({...item})) :
                 <div>No Items In this Menu Panel</div>
             }
         </div>

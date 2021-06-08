@@ -27,30 +27,30 @@ const styles = {
   },
 };
 
-function showErrors(errorMap) {
+const showErrors = (errorMap) => {
   //todo: append errors to modal
-  console.log(errorMap)
-}
+  console.log(errorMap);
+};
 
-function resetFields(...args) {
+const resetFields = (...args) => {
   args.forEach((fn) => fn(""));
-}
+};
 
-function isInvalidPrice(input) {
+const isInvalidPrice = (input) => {
   const regex = /^\s*-?[1-9]\d*(\.\d{1,2})?\s*$/;
   return !regex.test(input);
-}
+};
 
-function isInvalidName(name) {
-  return !name?.length > 0
-}
+const isInvalidName = (name) => {
+  return !name?.length > 0;
+};
 
-function validateFields(name, price, description) {
+const validateFields = (name, price) => {
   return {
     invalidName: isInvalidName(name),
-    invalidPrice: isInvalidPrice(price)
+    invalidPrice: isInvalidPrice(price),
   };
-}
+};
 
 export default function TransitionsModal({
   handleOpen,
@@ -63,28 +63,36 @@ export default function TransitionsModal({
   const [itemDescription, setItemDescription] = useState();
   const [formErrors, setFormErrors] = useState({
     invalidName: true,
-    invalidPrice: true
+    invalidPrice: true,
   });
 
-  useEffect(()=>{
-    setFormErrors(
-      validateFields(itemName, itemPrice)
-      );
-  },[itemName, itemPrice])
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const containsErrors = Object.values(formErrors).reduce(
+      (acc, curVal) => acc || curVal,
+      false
+    );
+    if (!containsErrors) {
+      formBtnHandler(e, itemName, itemPrice, itemDescription);
+      resetFields(setItemName, setItemPrice, setItemDescription);
+    } else {
+      showErrors(formErrors);
+    }
+  };
+
+  const handleModalOpen = () => {
+    resetFields(setItemName, setItemPrice, setItemDescription);
+    validateFields(itemName, itemPrice);
+    handleOpen();
+  };
+
+  useEffect(() => {
+    setFormErrors(validateFields(itemName, itemPrice));
+  }, [itemName, itemPrice]);
 
   return (
     <div>
-      <button 
-        style={styles.footer} 
-        type="button" 
-        onClick={
-          () => {
-            resetFields(setItemName, setItemPrice, setItemDescription)
-            validateFields(itemName, itemPrice)
-            handleOpen()
-          }
-        }
-      >
+      <button style={styles.footer} type="button" onClick={handleModalOpen}>
         Click here to add a menu item
       </button>
       <Modal
@@ -131,19 +139,7 @@ export default function TransitionsModal({
                 }}
               />
               <br />
-              <button
-                onClick={(e) => {
-                  e.preventDefault()
-                  const containsErrors = Object.values(formErrors).reduce((acc, curVal) => acc || curVal, false)
-                  if(!containsErrors){
-                      formBtnHandler(e, itemName, itemPrice, itemDescription)
-                      resetFields(setItemName, setItemPrice, setItemDescription)
-                  } else { 
-                    showErrors(formErrors)
-                  }
-                }}
-                style={styles.submitBtn}
-              >
+              <button onClick={handleSubmit} style={styles.submitBtn}>
                 Save
               </button>
             </form>

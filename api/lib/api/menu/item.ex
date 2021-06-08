@@ -14,6 +14,7 @@ defmodule Api.Menu.Item do
   def changeset(item, attrs) do
     item
     |> cast(attrs, [:name, :description, :price])
-    |> validate_required([:name, :description, :price])
+    |> unique_constraint(:name)
+    |> validate_required([:name, :price])
   end
 end

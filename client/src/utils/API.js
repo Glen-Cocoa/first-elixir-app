@@ -16,3 +16,29 @@ export const getMenu = async function () {
     console.error(e)
   }
 }
+
+export const addMenuItem = async function (item) {
+  try {
+    const data = JSON.stringify({ item: item })
+    const config = {
+      headers: { 
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*'
+      }
+    }
+
+    return await axios.post('http://localhost:4000/api/items', data, config)
+    .then((res) => console.log(res))
+  } catch (e) {
+    console.error(e)
+  }
+}
+
+export const deleteMenuItem = async function (id) {
+  try {
+    return await axios.delete(`http://localhost:4000/api/items/${id}`)
+    .then((res) => console.log(res))
+  } catch (e) {
+    console.error(e)
+  }
+}

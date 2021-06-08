@@ -67,11 +67,11 @@ defmodule Api.Menu do
       {:error, %Ecto.Changeset{}}
 
   """
-  def update_item(%Item{} = item, attrs) do
-    item
-    |> Item.changeset(attrs)
-    |> Repo.update()
-  end
+  # def update_item(%Item{} = item, attrs) do
+  #   item
+  #   |> Item.changeset(attrs)
+  #   |> Repo.update()
+  # end
 
   @doc """
   Deletes a item.
@@ -98,7 +98,7 @@ defmodule Api.Menu do
       %Ecto.Changeset{data: %Item{}}
 
   """
-  def change_item(%Item{} = item, attrs \\ %{}) do
-    Item.changeset(item, attrs)
-  end
+  # def change_item(%Item{} = item, attrs \\ %{}) do
+  #   Item.changeset(item, attrs)
+  # end
 end

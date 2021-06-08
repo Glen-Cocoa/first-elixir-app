@@ -1,0 +1,25 @@
+{
+  "name": "sweet-treats",
+  "version": "1.0.0",
+  "description": "menu/todo react app with pheonix back end",
+  "main": "mix phx.server",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "concurrently \"npm run server\" \"npm run client\"",
+    "server": "cd api && mix phx.server",
+    "client": "cd client && npm run start"
+  },
+  "devDependencies": {
+    "concurrently": "^4.1.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/malomohq/eli-steiger.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/malomohq/eli-steiger/issues"
+  },
+  "homepage": "https://github.com/malomohq/eli-steiger#readme"
+}

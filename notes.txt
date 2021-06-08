@@ -18,35 +18,30 @@ Must be able to edit menu
         brings up modal with inputs for { name, description, price }
         on save add's item to Menu
 
-TODO:
-=================================================================================
+handle for duplicate item names
 debounce resize
 lift up state - store or context
+
+set up route to
+get all items
+add new item
+
+TODO:
+=================================================================================
 add tests
 
-Extra Credit - back end to persist data via REST API
 add pagination
 
 make prettier
 add two pages - 
     one admin that allows editing
     one user that is read only
-=================================================================================
-
-handle for duplicate item names
+    
 errors & edge cases
 
 useReducer?
 
-bonus
-
-set up express server with some debounce
-
-set up route to
-get all items
-update item list
-
-extra 
+ 
 clear menu 
 create new menu but save old one
 

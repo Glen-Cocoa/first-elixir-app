@@ -1,13 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
 import SplitPane from "react-split-pane";
 import Panel from "../components/Panel";
 import useWindowSize from "../hooks/useWindowSize";
 import TransitionsModal from "../components/Modal";
+import ItemsContext from "../contexts/ItemsContext";
+import { addMenuItem } from "../utils/API"
 
-function Home({ handleBtnClick, items, setItems }) {
+function Home() {
   const { width, height } = useWindowSize();
   const numberOfItems = Math.floor(height / 130);
   const [open, setOpen] = React.useState(false);
+  const { menuItems, setMenuItems } = useContext(ItemsContext)
 
   const styles = {
     container: {
@@ -24,20 +27,24 @@ function Home({ handleBtnClick, items, setItems }) {
 
   const formBtnHandler = (e, name, price, description) => {
     e.preventDefault()
-    setItems([...items, { name, price, description}])
-    setOpen(false)
+    if(!menuItems.map((item)=>item.name).includes(name)){
+      const newItem = { name, price, description}
+      setMenuItems([...menuItems, newItem])
+      addMenuItem(newItem)
+      setOpen(false)
+    } else { 
+      console.error("Name must be unique")
+    }
   }
 
   return (
     <div style={styles.container} className="container">
       <SplitPane size={width / 2} minSize={width / 2} split="vertical">
         <Panel
-          items={items.slice(0, numberOfItems)}
-          clickHandler={handleBtnClick}
+          items={menuItems.slice(0, numberOfItems)}
         />
         <Panel
-          items={items.slice(numberOfItems, numberOfItems * 2)}
-          clickHandler={handleBtnClick}
+          items={menuItems.slice(numberOfItems, numberOfItems * 2)}
         />
       </SplitPane>
       <TransitionsModal
