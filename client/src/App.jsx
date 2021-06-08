@@ -23,7 +23,7 @@ function App() {
 
   useEffect(() => {
     API.getMenu().then((res) => {
-      setMenuItems(res?.data || [])
+      setMenuItems(res?.data?.data || [])
     })
   }, [])
 

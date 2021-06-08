@@ -29,7 +29,7 @@ add new item
 destructure react consistently
 make semicolon use consistent
 refactor modal validation
-
+resetFields to setters array & loop
 
 TODO:
 =================================================================================
@@ -53,5 +53,3 @@ drag and drop cards?
 fields editable on click? 
 
 external styles?
-
-resetFields to setters array & loop
