@@ -51,12 +51,6 @@ export default function TransitionsModal({
   const validateFields = (name, price) => {
     // make sure the price matches format of 1.00
     const regex = /^([0-9])\d*(?:\.\d{2})$/
-    console.log({
-      name: name,
-      invalidName: !name?.length > 0,
-      price: price,
-      invalidPrice: !regex.test(price)
-    })
     return {
       invalidName: !name?.length > 0,
       invalidPrice: !regex.test(price)
