@@ -5,6 +5,7 @@ import useWindowSize from '../hooks/useWindowSize'
 import TransitionsModal from '../components/Modal'
 import ItemsContext from '../contexts/ItemsContext'
 import { addMenuItem } from '../utils/API'
+import { ERRORS } from '../utils/constants'
 
 function Home() {
   const { width, height } = useWindowSize()
@@ -39,8 +40,7 @@ function Home() {
       resetFields(setters)
       setOpen(false)
     } else {
-      console.error('Name must be unique')
-      return
+      console.error(ERRORS.unique_name)
     }
   }
 
