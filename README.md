@@ -2,9 +2,9 @@
 
 Run npm start from root to start server and application
 
-must be configured with relevant connection string info to connect to a Postgres DB at `/api/config/dev.exs`
-  OR can read from environment variables
-  required env vars are
+must be configured with relevant connection string info to connect to a Postgres DB at `/api/config/dev.exs`  
+   OR can read from environment variables  
+   required env vars are  
 - DB_USER
 - DB_PASSWORD
 - DB_NAME
