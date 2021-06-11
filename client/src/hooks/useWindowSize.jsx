@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react'
-import debounce from 'lodash.debounce'
+import { throttle } from 'lodash'
 
 function getWindowSize() {
   const { innerWidth: width, innerHeight: height } = window
@@ -16,10 +16,10 @@ export default function useWindowSize() {
   const handleResize = () => {
     setWindowSize(getWindowSize())
   }
-  const debouncedResize = useCallback(debounce(handleResize, 10), [])
+  const throttledResize = useCallback(throttle(handleResize, 10), [windowSize])
   useEffect(() => {
-    window.addEventListener('resize', debouncedResize)
-    return () => window.removeEventListener('resize', debouncedResize)
+    window.addEventListener('resize', throttledResize)
+    return () => window.removeEventListener('resize', throttledResize)
   })
 
   return windowSize
