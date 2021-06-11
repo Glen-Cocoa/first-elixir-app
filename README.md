@@ -1,4 +1,4 @@
-# Eli's Sweet Treats
+# Todo+
 
 Run npm start from root to start server and application
 
